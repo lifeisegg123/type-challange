@@ -1,26 +1,26 @@
 /*
   189 - Awaited
   -------
-  by Maciej Sikora (@maciejsikora) #easy #promise #built-in
+  by Maciej Sikora (@maciejsikora) #쉬움 #promise #built-in
   
-  ### Question
+  ### 질문
   
-  If we have a type which is wrapped type like Promise. How we can get a type which is inside the wrapped type? For example if we have `Promise<ExampleType>` how to get ExampleType?
+  Promise와 같은 타입에 감싸인 타입이 있을 때, 안에 감싸인 타입이 무엇인지 어떻게 알 수 있을까요? 예를 들어 `Promise<ExampleType>`이 있을 때, `ExampleType`을 어떻게 얻을 수 있을까요?
   
-  > This question is ported from the [original article](https://dev.to/macsikora/advanced-typescript-exercises-question-1-45k4) by [@maciejsikora](https://github.com/maciejsikora)
+  > 출처: [original article](https://dev.to/macsikora/advanced-typescript-exercises-question-1-45k4) by [@maciejsikora](https://github.com/maciejsikora)
   
-  > View on GitHub: https://tsch.js.org/189
+  > GitHub에서 보기: https://tsch.js.org/189/ko
 */
 
-/* _____________ Your Code Here _____________ */
+/* _____________ 여기에 코드 입력 _____________ */
 
-type MyAwaited<T extends Promise<any>> = T extends Promise<infer P>
-  ? P extends Promise<any>
+type MyAwaited<T extends Promise<unknown>> = T extends Promise<infer P>
+  ? P extends Promise<unknown>
     ? MyAwaited<P>
     : P
   : never;
 
-/* _____________ Test Cases _____________ */
+/* _____________ 테스트 케이스 _____________ */
 import type { Equal, Expect } from "@type-challenges/utils";
 
 type X = Promise<string>;
@@ -36,9 +36,9 @@ type cases = [
 // @ts-expect-error
 type error = MyAwaited<number>;
 
-/* _____________ Further Steps _____________ */
+/* _____________ 다음 단계 _____________ */
 /*
-  > Share your solutions: https://tsch.js.org/189/answer
-  > View solutions: https://tsch.js.org/189/solutions
-  > More Challenges: https://tsch.js.org
+  > 정답 공유하기: https://tsch.js.org/189/answer/ko
+  > 정답 보기: https://tsch.js.org/189/solutions
+  > 다른 문제들: https://tsch.js.org/ko
 */
